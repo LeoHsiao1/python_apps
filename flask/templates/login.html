@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+        <h1>{{ msg }}</h1>
+        <form action="/login" method="POST">
+            Username: <input type="text" name="username" /><br>
+            Password: <input type="password" name="password" /><br>
+            <!-- Captcha:<input type="text" name="captcha" /><br>
+            <img src= "{{ captcha }}" /> -->
+        <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
