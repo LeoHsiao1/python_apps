@@ -18,10 +18,10 @@ def main():
     # Inputs.suffix = ".jpg"
 
     print("检索所有图片...")
-    file_list = searchFile(Inputs.path, [".jpg",".jpeg",".png"])
+    file_list = searchFile(Inputs.path, (".jpg",".jpeg",".png"))
 
     # 创建一个保存被修改图片的文件夹
-    result_dir = os.path.join(os.getcwd(), "resaved_images")
+    result_dir = os.path.join(os.getcwd(), "result")
     if not os.path.exists(result_dir):
         os.mkdir(result_dir)
 
@@ -36,7 +36,7 @@ def main():
 
             # 创建保存图片的子目录
             result_path = path.replace(Inputs.path, result_dir, 1)
-            result_path = result_path[:result_path.rfind('.')]+".jpg"     # 保存为.jpg文件
+            result_path = result_path[:result_path.rfind('.')] + ".jpg"
             os.makedirs(os.path.dirname(result_path), exist_ok=True)
 
             # 保存图片
