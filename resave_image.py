@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+"""
+检索指定目录（包括子目录）下的所有.jpg图片，将它们另存到当前目录。
+"""
+
 import os
 import traceback
 
