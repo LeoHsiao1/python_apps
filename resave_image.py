@@ -3,8 +3,7 @@ import traceback
 
 from PIL import Image
 
-from utils import Inputs
-from utils import searchFile
+from utils import Inputs, searchFile, test_run
 
 
 def main():
@@ -14,8 +13,7 @@ def main():
     # Inputs.suffix = ".jpg"
 
     print("检索所有图片...")
-    file_list = searchFile(Inputs.path, ".jpg")+searchFile(Inputs.path,
-                                                           ".jpeg")+searchFile(Inputs.path, ".png")
+    file_list = searchFile(Inputs.path, [".jpg",".jpeg",".png"])
 
     # 创建一个保存被修改图片的文件夹
     result_dir = os.path.join(os.getcwd(), "resaved_images")
@@ -37,22 +35,15 @@ def main():
             os.makedirs(os.path.dirname(result_path), exist_ok=True)
 
             # 保存图片
-            img.save(result_path, quality=100)
+            img.save(result_path, quality=95)
             print("已保存：{}".format(result_path))
 
         except:
             print("处理失败：{}".format(path))
             traceback.print_exc()
 
-    print("\n已全部完成。\n")
-    return 0
+    print("\n全部完成。\n")
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except:
-        print("\n运行出错！\n")
-        traceback.print_exc()
-    finally:
-        os.system("pause")
+    test_run(main)

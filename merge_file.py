@@ -1,13 +1,17 @@
+# -*- coding: utf-8 -*-
+"""
+该程序用于检索指定目录（包括子目录）下某种后缀名的文件，将它们合并成一个文件。
+"""
+
 import os
 import traceback
 
-from utils import Inputs
-from utils import searchFile
+from utils import Inputs, searchFile, test_run
 
 
 def main():
     # 提示用户输入
-    print("该程序用于检索指定目录（包括子目录）下的所有文件，将它们合并成一个文件。")
+    print("该程序用于检索指定目录（包括子目录）下某种后缀名的文件，将它们合并成一个文件。")
     Inputs.path = Inputs.input_path("请输入要检索的目录：")
     Inputs.suffix = input("请输入要合并的这类文件的后缀名（例如'.txt'）：")
 
@@ -26,18 +30,11 @@ def main():
                     f.write(raw_file.read())
                     print("已处理：{}".format(path))
             except:
-                print("未能成功处理文件：{}".format(path))
+                print("处理失败：{}".format(path))
                 traceback.print_exc()
 
-    print("\n检索完成！\n数据保存为文件：{} ".format(result_file_name))
-    return 0
+    print("\n全部完成！\n数据保存为文件：{} ".format(result_file_name))
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except:
-        print("\n运行出错！\n")
-        traceback.print_exc()
-    finally:
-        os.system("pause")
+    test_run(main)
