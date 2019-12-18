@@ -24,7 +24,7 @@ def parse(raw_data: bytes):
             if isinstance(p[0], str):
                 value = p[0]
             else:
-                value = p[0].decode(p[1])
+                value = p[0].decode(p[1] or 'utf-8')
             result[k].append(value)
 
     # parse payload
