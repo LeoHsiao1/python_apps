@@ -6,7 +6,7 @@
 import asyncore
 import smtpd
 
-from pop import parse
+from pop import parse_email
 
 
 class CustomSMTPServer(smtpd.SMTPServer):
@@ -14,8 +14,7 @@ class CustomSMTPServer(smtpd.SMTPServer):
         print("\n\n# Received email")
         print("From: ", mailfrom, peer)
         print("To: ", rcpttos)
-        print("raw_data: ", data)
-        print("parsed:", parse(data))
+        print("parsed:", parse_email(data))
 
 
 server = CustomSMTPServer(("127.0.0.1", 9000), None)  # 创建SMTP服务器
