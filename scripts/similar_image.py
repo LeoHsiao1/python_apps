@@ -7,3 +7,4 @@ h2 = phash(Image.open(r"c:\Users\Leo\Desktop\pic_test\加了两个水印.jpg"))
 
 1 - (h1 - h2) / 64  # 相似度
 
+，，，TODO
