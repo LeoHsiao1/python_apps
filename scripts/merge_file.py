@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-检索指定目录（包括子目录）下某种后缀名的文件，将它们合并成一个文件。
-"""
-
 import os
 import traceback
 
@@ -10,9 +6,9 @@ from utils import Inputs, find_file
 
 
 # 提示用户输入
-print("该程序用于检索指定目录（包括子目录）下某种后缀名的文件，将它们合并成一个文件。")
-Inputs.path = Inputs.input_path("请输入要检索的目录：")
-Inputs.pattern = input("请输入要合并的这类文件的名字格式（比如'*.txt'）：")
+print("该脚本的用途：找出目标目录（包括子目录）下某种名字的文件，将它们合并成一个文件。")
+Inputs.path = Inputs.input_path("请输入目标目录：")
+Inputs.pattern = input("请输入文件名格式（比如'*.txt'）：")
 
 # 设置保存检索结果的文件路径
 result_file_name = "merge_result"

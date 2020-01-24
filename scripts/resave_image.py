@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-检索指定目录（包括子目录）下的所有图片，将它们保存到当前目录下，从而刷新它们的哈希值。
-并且，将png、jpeg后缀名的图片都转换成jpg后缀名，方便统一管理。
-"""
-
 import os
 import traceback
 
@@ -12,9 +7,9 @@ from PIL import Image
 from utils import Inputs, find_file
 
 
-print("""该脚本用于检索指定目录（包括子目录）下的所有图片（后缀名为jpg、jpeg、png），将它们另存到当前目录下（后缀名改为jpg）。""")
+print("""该脚本的用途：找出目标目录（包括子目录）下的所有图片（后缀名为jpg、jpeg、png），将它们另存到当前目录下（后缀名改为jpg）。""")
 
-Inputs.path = Inputs.input_path('请输入要检索的目录：')
+Inputs.path = Inputs.input_path('请输入目标目录：')
 
 print('检索所有文件...')
 file_list = find_file(Inputs.path)
@@ -25,11 +20,11 @@ os.makedirs(result_dir, exist_ok=True)
 
 print('开始修改...')
 for path in file_list:
-    original_suffix = path[path.rfind('.'):].lower()
-    if original_suffix == '.jpg':
+    suffix = path[path.rfind('.'):].lower()
+    if suffix == '.jpg':
         new_suffix = '.jpg'
-    elif original_suffix in ['.jpeg', '.png']:
-        new_suffix = original_suffix + '.jpg'
+    elif suffix in ['.jpeg', '.png']:
+        new_suffix = suffix + '.jpg'
     else:
         continue
 

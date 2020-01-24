@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-替换文件中的字符串，基于正则语法。
+该脚本的用途：替换文件中的字符串，基于正则语法。
 
 Sample：
 python3 replace.py --file 1.py --src '([\u4e00-\u9fa5])(\w)' --dst '$1 $2'
