@@ -7,7 +7,6 @@ from utils import Inputs, find_file
 
 
 print("""该脚本的用途：检查目标目录（包括子目录）下所有文件的文件名，将编号 (1) - (9) 改为 (01) - (09) 。""")
-
 Inputs.path = Inputs.input_path('请输入要检索的目录：')
 
 print('检索所有文件...')
