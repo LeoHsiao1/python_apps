@@ -7,10 +7,8 @@ from PIL import Image
 from utils import Inputs, find_file
 
 
-print("""该脚本的用途：找出目标目录（包括子目录）下的所有图片（后缀名为jpg、jpeg、png），将它们另存到当前目录下（后缀名改为jpg）。""")
-
+print("""该脚本的用途：找出目标目录（包括子目录）下的所有图片（后缀名为jpg、jpeg、png），将它们的图片内容另存到当前目录下（后缀名改为jpg）。""")
 Inputs.path = Inputs.input_path('请输入目标目录：')
-
 print('检索所有文件...')
 file_list = find_file(Inputs.path)
 
@@ -18,7 +16,7 @@ file_list = find_file(Inputs.path)
 result_dir = os.path.join(os.getcwd(), 'results')
 os.makedirs(result_dir, exist_ok=True)
 
-print('开始修改...')
+print('开始处理...')
 for path in file_list:
     suffix = path[path.rfind('.'):].lower()
     if suffix == '.jpg':

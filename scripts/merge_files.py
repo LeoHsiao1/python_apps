@@ -17,7 +17,7 @@ result_file_name = "merge_result"
 file_list = find_file(Inputs.path, pattern=Inputs.pattern)
 
 # 读取每个文件的内容并合并
-print("开始检索...")
+print("开始处理...")
 with open(result_file_name, 'wb') as f:  # 以二进制模式打开，这样就不用考虑编码格式
     for path in file_list:
         try:

@@ -26,7 +26,7 @@ for path in file_list:
 
     try:
         os.rename(path, new_path)
-        print('已保存：{}'.format(new_path))
+        print('已改名：{}'.format(new_path))
 
     except:
         print('处理失败：{}'.format(path))
