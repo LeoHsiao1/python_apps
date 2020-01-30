@@ -26,6 +26,7 @@ for path in file_list:
     
     try:
         img = Image.open(path)
+
         img_selected = False   # 一个标志位，代表是否筛选出该图片
 
         # 筛选出高度小于1080的图片
