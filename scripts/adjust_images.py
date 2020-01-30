@@ -63,8 +63,9 @@ for path in file_list:
 
         # 删除原图片
         img.close()
-        os.remove(path)
-
+        if new_path != path:
+            os.remove(path)
+        
         # 写入原图片的标签
         if subject:
             new_metadata = pyexiv2.Image(new_path)
