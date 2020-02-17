@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+需要安装：  pip install pillow==7.0.0 pyexiv2==2.0.0
+"""
 import os
 import traceback
 
@@ -55,8 +58,8 @@ for path in file_list:
                     break
 
         # 读取原图片的标签
-        metadata = pyexiv2.Image(path)
-        subject = metadata.read_xmp().get('Xmp.dc.subject')
+        with pyexiv2.Image(path, 'gbk') as metadata:
+            subject = metadata.read_xmp().get('Xmp.dc.subject')
 
         # 保存新图片
         img.save(new_path, format='JPEG', quality=95)
@@ -68,8 +71,8 @@ for path in file_list:
         
         # 写入原图片的标签
         if subject:
-            new_metadata = pyexiv2.Image(new_path)
-            new_metadata.modify_xmp({'Xmp.dc.subject': subject})
+            with pyexiv2.Image(new_path, 'gbk') as new_metadata:
+                new_metadata.modify_xmp({'Xmp.dc.subject': subject})
 
         print('已保存：{}'.format(new_path))
 
