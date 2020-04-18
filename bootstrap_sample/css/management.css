@@ -1,0 +1,28 @@
+body {
+    background-color: #212a70;
+    /* background-image: url(../img/bg.png);
+    background-repeat: no-repeat; */
+}
+
+.col-md-10 {
+    top: 4em;
+    color: white;
+    font-size: 0.75em;
+}
+
+input.form-control, input.form-control:focus{
+    background-color: transparent;
+    border-style: solid;
+    border-width: 0.1em;
+    border-color: #2525c9;
+    color: #ffffff;
+}
+
+.nav-tabs .nav-link.active{
+    background-color: transparent;
+    color: #0c66cc;
+}
+
+.table th {
+    background-color: #212a70;
+}
