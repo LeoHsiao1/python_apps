@@ -7,6 +7,10 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "产品"
+        verbose_name_plural = "产品"
+        # ordering = ["-datetime"]
 
 class Project(models.Model):
     name = models.CharField(verbose_name='项目', max_length=32, unique=True, default='')
@@ -16,3 +20,7 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = "项目"
+        verbose_name_plural = "项目"
