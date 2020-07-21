@@ -1,9 +1,6 @@
 from django.contrib import admin
 from . import models
 
-admin.site.site_title = '后台管理'
-admin.site.site_header = '后台管理'
-
 
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
