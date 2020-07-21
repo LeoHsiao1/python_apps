@@ -1,2 +1,2 @@
 Django==3.0.7      # 本机的 SQLite 版本过低的话则要用 2.1.8
-django-simpleui==4.0.2
+django-simpleui==4.0.3
