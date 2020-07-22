@@ -22,9 +22,9 @@ file_list = find_file(Inputs.path)
 
 print('开始处理...')
 for path in file_list:
-    suffix = path[path.rfind('.'):].lower()
+    suffix = path[path.rfind('.'):]
     # 只处理这些后缀名的图片文件
-    if suffix not in ['.jpg', '.jpeg', '.webp', '.png']:
+    if suffix.lower() not in ['.jpg', '.jpeg', '.webp', '.png', '.jfif']:
         continue
     new_suffix = '.jpg'
 
@@ -72,6 +72,12 @@ for path in file_list:
         if subject:
             with pyexiv2.Image(new_path, 'gbk') as new_metadata:
                 new_metadata.modify_xmp({'Xmp.dc.subject': subject})
+
+        # # 清除图片的元数据
+        # with pyexiv2.Image(new_path) as img:
+        #     img.clear_exif()
+        #     img.clear_iptc()
+        #     img.clear_xmp()
 
         print('已保存：{}'.format(new_path))
 
