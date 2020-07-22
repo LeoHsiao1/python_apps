@@ -1,9 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
-# from . import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('app1.urls')), # 转发给 app1 的 urls.py
+    path('', include('app1.urls')),
 ]
+
+
+admin.site.site_title = '后台管理'
+admin.site.site_header = '后台管理'

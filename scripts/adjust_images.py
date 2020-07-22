@@ -68,7 +68,7 @@ for path in file_list:
         if new_path != path:
             os.remove(path)
         
-        # 写入原图片的标签
+        # 拷贝原图片的标签
         if subject:
             with pyexiv2.Image(new_path, 'gbk') as new_metadata:
                 new_metadata.modify_xmp({'Xmp.dc.subject': subject})
