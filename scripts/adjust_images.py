@@ -11,9 +11,13 @@ import pyexiv2
 from utils import Inputs, find_file
 
 
-print("""该脚本的用途：检查目标目录（包括子目录）下的所有图片，如果它们不符合以下特征则自动修改：
-- 后缀名为jpg
-- 只保留图片元数据中的标签""")
+print("""
+该脚本用于修改目标目录（包括子目录）下的所有图片：
+- 后缀名改为jpg
+- 原图体积过大则重新保存，以减少体积
+- 保留图片元数据中的标签
+- 以上修改都具有幂等性
+""")
 
 Inputs.path = Inputs.input_path('请输入目标目录：')
 
@@ -29,60 +33,66 @@ for path in file_list:
     new_suffix = '.jpg'
 
     try:
-        img = Image.open(path)
+        with Image.open(path) as img:
+            width, height = img.size
 
-        # 如果原图片已满足条件，则不修改
-        if suffix == '.jpg' and img.mode == 'RGB' and img.size[1] >= 1080:
-            continue
-        
-        # 通过pillow生成新图片并保存
-        if img.mode != 'RGB':
-            img = img.convert('RGB')
-        
-        # # 如果原图片的高度小于1080，则放大至1080（这样放大会产生锯齿）
-        # if img.size[1] < 1080:
-        #     width, height = img.size
-        #     times = 1080 / height
-        #     new_size = round(width * times), round(height * times)
-        #     img = img.resize(new_size)
+            # 判断是否需要修改图片
+            if suffix != '.jpg':
+                pass
+            elif img.mode != 'RGB':
+                img = img.convert('RGB')
+            elif height > 3000:
+                # 缩小图片尺寸（即使不缩小，重新保存也会减少图片体积）
+                rate = height / 3000
+                img.thumbnail((width / rate, height / rate))
+                pass
+            else:
+                continue    # 如果图片不需要修改，则跳过
 
-        # 生成新图片的保存路径
-        new_path = path[:path.rfind('.')] + new_suffix
-        # 如果新路径已被其它文件占用，则在文件名末尾再添加一个.jpg（此后需要手动改名）
-        if new_path != path:
-            while 1:
-                if os.path.isfile(new_path):
-                    new_path += '.jpg'
-                else:
-                    break
+            # # 如果原图片的高度小于1080，则放大至1080（不推荐，因为这样放大会产生锯齿）
+            # if img.size[1] < 1080:
+            #     width, height = img.size
+            #     times = 1080 / height
+            #     new_size = round(width * times), round(height * times)
+            #     img = img.resize(new_size)
 
-        # 读取原图片的标签
-        with pyexiv2.Image(path, 'gbk') as metadata:
-            subject = metadata.read_xmp().get('Xmp.dc.subject')
+            # 生成新图片的保存路径
+            new_path = path[:path.rfind('.')] + new_suffix
+            # 如果新路径已被其它文件占用，则在文件名末尾再添加一个.jpg（此后需要用户手动改名）
+            if new_path != path:
+                while 1:
+                    if os.path.isfile(new_path):
+                        new_path += '.jpg'
+                    else:
+                        break
 
-        # 保存新图片
-        img.save(new_path, format='JPEG', quality=95)
+            # 读取原图片的标签
+            with pyexiv2.Image(path, 'gbk') as metadata:
+                subject = metadata.read_xmp().get('Xmp.dc.subject')
 
-        # 删除原图片
-        img.close()
-        if new_path != path:
-            os.remove(path)
-        
-        # 拷贝原图片的标签
-        if subject:
-            with pyexiv2.Image(new_path, 'gbk') as new_metadata:
-                new_metadata.modify_xmp({'Xmp.dc.subject': subject})
+            # 保存新图片
+            img.save(new_path, format='JPEG', quality=95)
 
-        # # 清除图片的元数据
-        # with pyexiv2.Image(new_path) as img:
-        #     img.clear_exif()
-        #     img.clear_iptc()
-        #     img.clear_xmp()
+            # 删除原图片
+            img.close()
+            if new_path != path:
+                os.remove(path)
 
-        print('已保存：{}'.format(new_path))
+            # 粘贴原图片的标签
+            if subject:
+                with pyexiv2.Image(new_path, 'gbk') as new_metadata:
+                    new_metadata.modify_xmp({'Xmp.dc.subject': subject})
+
+            # # 清除图片的元数据
+            # with pyexiv2.Image(new_path) as img:
+            #     img.clear_exif()
+            #     img.clear_iptc()
+            #     img.clear_xmp()
+
+            print('已保存：{}'.format(new_path))
 
     except:
         print('处理失败：{}'.format(path))
         traceback.print_exc()
 
-print('\n全部完成。\n')
+print('\n脚本结束\n')
