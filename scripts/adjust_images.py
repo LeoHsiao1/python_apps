@@ -14,7 +14,7 @@ from utils import Inputs, find_file
 print("""
 该脚本用于修改目标目录（包括子目录）下的所有图片：
 - 后缀名改为jpg
-- 原图体积过大则重新保存，以减少体积
+- 图片高度超过4000则缩小
 - 保留图片元数据中的标签
 - 以上修改都具有幂等性
 """)
@@ -41,9 +41,9 @@ for path in file_list:
                 pass
             elif img.mode != 'RGB':
                 img = img.convert('RGB')
-            elif height > 3000:
-                # 缩小图片尺寸（即使不缩小，重新保存也会减少图片体积）
-                rate = height / 3000
+            elif height > 4000:
+                # 缩小图片尺寸（即使不缩小，重新保存也会减少图片体积，而且也具有幂等性）
+                rate = height / 4000
                 img.thumbnail((width / rate, height / rate))
                 pass
             else:
