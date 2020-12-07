@@ -6,5 +6,5 @@ app_name = 'app1'
 
 urlpatterns = [
     # path('login/', views.login),
-    path('', views.home),
+    path('home/', views.home),
 ]
