@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'app1.apps.App1Config',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE = [      # 中间件
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -1,12 +1,22 @@
 from django.contrib import admin
+from import_export.admin import ImportExportMixin
 
 
 admin.site.site_title  = '后台管理'
 admin.site.site_header = admin.site.site_title
 
 
+class MyModelAdmin(admin.ModelAdmin):
+    save_as = True
+    list_per_page = 15
+
+
+class MyImportExportModelAdmin(ImportExportMixin, MyModelAdmin):
+    pass
+
+
 @admin.register(admin.models.LogEntry)
-class LogEntryAdmin(admin.ModelAdmin):
+class LogEntryAdmin(MyImportExportModelAdmin):
     """ 该类用于显示 admin 内置的 django_admin_log 表 """
     list_display       = ['action_time', 'user', 'content_type', '__str__']   # content_type 是指用户修改的 Model 名
     list_display_links = ['action_time']

@@ -1,15 +1,16 @@
 from django.contrib import admin
+from django_site.admin import MyImportExportModelAdmin
 from . import models
 
 
 @admin.register(models.Person)
-class PersonAdmin(admin.ModelAdmin):
+class PersonAdmin(MyImportExportModelAdmin):
     list_display  = ['name']
     search_fields = ['name']
 
 
 @admin.register(models.Book)
-class BookAdmin(admin.ModelAdmin):
+class BookAdmin(MyImportExportModelAdmin):
     # 配置表格页面
     list_display       = ['name', 'author', 'datetime']     # 设置要显示的字段
     list_display_links = ['name']                           # 哪些字段显示成链接，可以跳转到实例的详情页面
