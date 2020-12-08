@@ -1,27 +1,29 @@
 from django.db import models
 
 
-class Product(models.Model):
-    name = models.CharField(verbose_name='产品', max_length=32, unique=True, default='')
+class Person(models.Model):
+    name       = models.CharField(verbose_name='姓名', max_length=32, unique=True, default='')
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = "产品"
-        verbose_name_plural = "产品"
-        # ordering = ["-datetime"]
+        verbose_name = '人物'
+        verbose_name_plural = verbose_name
 
 
-class Project(models.Model):
-    name = models.CharField(verbose_name='项目', max_length=32, unique=True, default='')
-    product = models.ForeignKey(verbose_name='所属产品', to=Product, on_delete=models.PROTECT, default=1, parent_link=True)
-    configs = models.TextField(verbose_name='配置', blank=True, default='')
-    datetime = models.DateTimeField(verbose_name='修改日期', auto_now=True)
+class Book(models.Model):
+    name       = models.CharField(verbose_name='书名', max_length=32, unique=True, default='')
+    abstract   = models.TextField(verbose_name='摘要', blank=True, default='')
+    author     = models.ForeignKey(Person, on_delete=models.PROTECT, verbose_name='作者', related_name='book_set', null=True, blank=True)
+    reader_set = models.ManyToManyField(to=Person, verbose_name='读者', related_name='read_book_set', blank=True)
+    datetime   = models.DateTimeField(verbose_name='修改日期', auto_now=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = "项目"
-        verbose_name_plural = "项目"
+        verbose_name = '书籍'
+        verbose_name_plural = verbose_name
+        ordering = ["-datetime"]
+

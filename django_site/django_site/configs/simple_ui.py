@@ -1,4 +1,4 @@
-# SIMPLEUI_HOME_PAGE = '/admin/asset_mgmt/link/'
+# SIMPLEUI_HOME_PAGE = '/admin/'
 SIMPLEUI_HOME_ICON = 'fas fa-home'
 SIMPLEUI_CONFIG = {
     # 'system_keep': True,
@@ -7,12 +7,12 @@ SIMPLEUI_CONFIG = {
             'name': '应用一',
             # 'icon': 'fas fa-users',
             'models': [{
-                'name': '产品',
-                'url': '/admin/app1/Product/',
+                'name': '人物',
+                'url': '/admin/app1/person/',
                 # 'icon': 'fas fa-users'
             }, {
-                'name': '项目',
-                'url': '/admin/app1/Project/',
+                'name': '书籍',
+                'url': '/admin/app1/book/',
                 # 'icon': 'fas fa-user'
             }]
         },
