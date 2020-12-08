@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'app1.apps.App1Config',
 ]
 
-MIDDLEWARE = [      # 中间件
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -100,13 +100,14 @@ WSGI_APPLICATION = 'django_site.wsgi.application'
 
 LANGUAGE_CODE = 'zh-hans'
 TIME_ZONE = 'Asia/Shanghai'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
+USE_I18N = True     # 是否自动翻译前端的一些单词
+USE_L10N = True     # 是否按本地格式显示日期时间
+USE_TZ = True       # 是否在程序中按 UTC 时区处理时间，在前端输出时才自动转换成本地时区
 
 # 以上是 Django 自带的配置项
 
 # 以下是导入某些模块的内容作为配置
+from .configs.logging       import *
+from .configs.simple_ui     import *
 from .configs.import_export import *
-from .configs.logging import *
-from .configs.simple_ui import *
+from .configs.cache         import *
