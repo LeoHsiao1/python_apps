@@ -4,10 +4,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'bNpvCDKINH8go7qsL7V3Y3VQ5fy0GEnJVvXtoKUI9OIuqmt1L0'
 DEBUG = True
-ALLOWED_HOSTS = ['*']   # 允许哪些 IP 访问本网站
-INTERNAL_IPS  = [       # 对哪些 IP 显示调试工具栏 debug_toolbar
-    '127.0.0.1',
-]
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     # 第三方插件
@@ -92,17 +89,17 @@ TEMPLATES = [
     },
 ]
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL       = '/static/'
+STATIC_ROOT      = os.path.join(BASE_DIR, 'static')
 
-ROOT_URLCONF = 'django_site.urls'
+ROOT_URLCONF     = 'django_site.urls'
 WSGI_APPLICATION = 'django_site.wsgi.application'
 
-LANGUAGE_CODE = 'zh-hans'
-TIME_ZONE = 'Asia/Shanghai'
-USE_I18N = True     # 是否自动翻译前端的一些单词
-USE_L10N = True     # 是否按本地格式显示日期时间
-USE_TZ = True       # 是否在程序中按 UTC 时区处理时间，在前端输出时才自动转换成本地时区
+LANGUAGE_CODE    = 'zh-hans'
+TIME_ZONE        = 'Asia/Shanghai'
+USE_I18N         = True
+USE_L10N         = True
+USE_TZ           = True
 
 # 以上是 Django 自带的配置项
 
@@ -111,3 +108,8 @@ from .configs.logging       import *
 from .configs.simple_ui     import *
 from .configs.import_export import *
 from .configs.cache         import *
+
+
+INTERNAL_IPS  = [       # 对哪些 IP 显示调试工具栏 debug_toolbar
+    '127.0.0.1',
+]
