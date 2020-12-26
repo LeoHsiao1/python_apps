@@ -1,6 +1,7 @@
 import logging
 import logging.config
 import os
+from datetime import datetime
 
 from ..settings import BASE_DIR
 
@@ -35,7 +36,7 @@ LOGGING = {
             'level': 'DEBUG',
             'formatter': 'verbose',
             'class': 'logging.handlers.TimedRotatingFileHandler',  # 将日志输出到文件，并按时间自动翻转文件
-            'filename': os.path.join(log_dir, 'django.log'),
+            'filename': os.path.join(log_dir, 'django.log.' + datetime.now().strftime('%Y-%m-%d')),
             'encoding': 'utf-8',
             'utc': False,
             'when': 'D',
