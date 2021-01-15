@@ -14,7 +14,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {                            # 定义一个日志的格式器
-            'format': '{asctime}  {levelname:6} {filename:15} {funcName:15} L{lineno:<8} {message}',
+            'format': '{asctime} {levelname:5} {threadName:15}  {message}',
             'datefmt': '%Y/%m/%d %H:%M:%S',
             'style': '{'
 
