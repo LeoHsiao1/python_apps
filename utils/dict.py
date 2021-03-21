@@ -1,25 +1,30 @@
-"""
-关于字典
-"""
+""" Contains some code related to dict """
+
 
 def sort_dict(_dict):
-    """ 基于sorted()，按key对字典排序，返回一个新字典。 """
+    """ Sort the dict by key, return a new dict. Based on sorted(). """
     return dict(sorted(_dict.items(), key=lambda x: x[0]))
 
 
 def flat_key(layer):
-    """ 将多层key合并为一个key，例如：flat_key(["1","2",3,4]) -> "1[2][3][4]" """
+    """
+    Merges nested keys into a single key.
+    
+    Sample:
+    >>> flat_key(['1', '2', 3, 4])
+    '1[2][3][4]'
+    """
     if len(layer) == 1:
         return layer[0]
     else:
-        _list = ["[{}]".format(k) for k in layer[1:]]
-        return layer[0] + "".join(_list)
+        _list = ['[{}]'.format(k) for k in layer[1:]]
+        return layer[0] + ''.join(_list)
 
 
 def flat_dict(_dict):
-    """ 展开嵌套字典，返回一个单层字典。 """
+    """ Expand the nested dict, return a single-layer dictionary. """
     if not isinstance(_dict, dict):
-        raise TypeError("argument must be a dict, not {}".format(type(_dict)))
+        raise TypeError('Argument must be a dict, not {}'.format(type(_dict)))
     def __flat_dict(pre_layer, value):
         result = {}
         for k, v in value.items():
@@ -33,11 +38,11 @@ def flat_dict(_dict):
     return __flat_dict([], _dict)
 
 
-# sample
-if __name__ == "__main__":
-    payload = {"status": 200,
-                "body": {"id": 1,
-                        "msg": "hello"}
-                }
+if __name__ == '__main__':
+    payload = {'status': 200,
+               'body': {'id': 1,
+                        'msg': 'hello'}
+
+               }
     _dict = flat_dict(payload)
     print(_dict.items())
