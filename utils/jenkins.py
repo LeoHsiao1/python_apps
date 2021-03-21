@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 访问Jenkins的API。
 需要安装：pip install jenkinsapi==0.3.9

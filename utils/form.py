@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 读写csv、xlsx表格。
 读写xlsx表格时需要安装：pip install openpyxl

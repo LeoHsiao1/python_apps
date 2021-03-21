@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 关于画图。
 需要安装：pip install matplotlib
