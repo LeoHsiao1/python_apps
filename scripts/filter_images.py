@@ -5,7 +5,9 @@ import traceback
 
 from PIL import Image
 
-from utils import Inputs, find_file
+import _load_utils
+from utils.io import Inputs
+from utils.os import find_file
 
 
 print("""该脚本的用途：找出目标目录（包括子目录）下的所有图片（后缀名为jpg、png），筛选出符合条件的图片，将它们拷贝到当前目录下。""")

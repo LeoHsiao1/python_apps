@@ -5,8 +5,10 @@
 Sample：
 python3 replace.py --file 1.py --src '([\u4e00-\u9fa5])(\w)' --dst '$1 $2'
 '''
-from utils import replace
 import argparse
+
+import _load_utils
+from utils.re import replace
 
 
 parser = argparse.ArgumentParser(description=r"""This script is use to replace string in a file. Sample: python3 replace.py --file 1.py --src '([\u4e00-\u9fa5])(\w)' --dst '$1 $2' """)
