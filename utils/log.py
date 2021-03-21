@@ -1,9 +1,48 @@
 """
-记录日志
+用于记录日志
 """
 
 import time
 import logging
+
+
+class Log:
+    """
+    A simple log class for caching log text.
+
+    Sample:
+    >>> log = Log()
+    >>> log.info('test...')
+    >>> log.warn('test...')
+    >>> log.dump()
+    '[INFO] test...\n[WARN] test...'
+    """
+
+    def __init__(self):
+        self.buffer = []
+
+    def clear(self):
+        self.buffer = []
+
+    def to_str(self):
+        return '\n'.join(self.buffer)
+
+    def dump(self):
+        _dump = self.to_str()
+        self.clear()  # clear the buffer to avoid duplicate output
+        return _dump
+
+    def add(self, msg):
+        self.buffer.append(str(msg))
+
+    def info(self, msg, index=None):
+        self.add('[INFO] {}'.format(msg))
+
+    def warn(self, msg):
+        self.add('[WARN] {}'.format(msg))
+
+    def error(self, msg):
+        self.add('[ERROR] {}'.format(msg))
 
 
 class Logger:
