@@ -1,6 +1,4 @@
-"""
-关于计时、定时任务。
-"""
+""" Used to extend functions of time module. """
 
 import time
 import threading
@@ -9,8 +7,8 @@ import threading
 class Clock:
     """
     一个时钟类，用于获取几种不同格式的当前时间。
-      `decimal`: 设置time_float的精度，控制其保留几位小数。
-      `time_diff`: 设置该时钟与UTC+0时区的时差。如果不设置，会自动采用
+    - `decimal`: 设置time_float的精度，控制其保留几位小数。
+    - `time_diff`: 设置该时钟与UTC+0时区的时差。如果不设置，会自动采用
       本地时区。
     """
 
@@ -18,7 +16,7 @@ class Clock:
         self.name = name
         self.decimal = decimal
         self.time_diff = time_diff
-        self.time_format = "%Y/%m/%d %H:%M:%S"  # 时间字符串的格式
+        self.time_format = "%Y/%m/%d %H:%M:%S"
 
     @property
     def time_float(self):
@@ -47,8 +45,8 @@ class Clock:
 class Timer(Clock):
     """
     一个计时器，像秒表，可以随时查看当前计时、暂停计时、继续计时。
-      - 继承_Clock类，调用其方法来获取当前时间、控制时间精度。
-      - 创建一个计时器之后，它就会开始计时，但并不需要创建一个线程。
+    - 继承_Clock类，调用其方法来获取当前时间、控制时间精度。
+    - 创建一个计时器之后，它就会开始计时，但并不需要创建一个线程。
     """
 
     def __init__(self, *args, **kwargs):
@@ -90,9 +88,9 @@ class Schedule(threading.Thread):
     """
     一个定时任务表，添加第一个定时任务后就创建一个线程，开始循环检查
     是否执行任务表中的任务。
-      - 调用 addTask() 添加一项定时任务
-      - 调用 stop() 终止该线程
-      - 每隔 interval 秒判断一次是否执行任务
+    - 调用 addTask() 添加一项定时任务
+    - 调用 stop() 终止该线程
+    - 每隔 interval 秒判断一次是否执行任务
     """
 
     def __init__(self, interval=0.1, *args, **kwargs):
@@ -181,7 +179,6 @@ class SimpleThread(threading.Thread):
         self.func(*self.args, **self.kwargs)
 
 
-# sample
 if __name__ == "__main__":
 
     t1 = Timer("t1")

@@ -1,7 +1,4 @@
-"""
-与终端交互
-"""
-
+""" Used to handle the input and output on the terminal. """
 import os
 import sys
 import time
@@ -19,7 +16,7 @@ class Inputs:
             try:
                 return int(input(tip_str))
             except:
-                print("输入的不是整数！")
+                print('输入的不是整数！')
 
     @staticmethod
     def input_positive_int(tip_str='', retry=True):
@@ -28,7 +25,7 @@ class Inputs:
             if num > 0:
                 return num
             else:
-                print("输入的不是正整数！")
+                print('输入的不是正整数！')
 
     @staticmethod
     def input_real_num(tip_str='', retry=True):
@@ -36,7 +33,7 @@ class Inputs:
             try:
                 return float(input(tip_str))
             except:
-                print("输入的不是整数或浮点数！")
+                print('输入的不是整数或浮点数！')
 
     @staticmethod
     def input_path(tip_str='', retry=True):
@@ -46,7 +43,7 @@ class Inputs:
                 # 如果该path存在，则转换成正常格式的绝对地址
                 return os.path.abspath(os.path.normpath(path))
             else:
-                print("输入的不是有效目录！")
+                print('输入的不是有效目录！')
 
 
 def print_text(text, delay=0):

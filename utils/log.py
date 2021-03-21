@@ -1,7 +1,4 @@
-"""
-用于记录日志
-"""
-
+""" Used for recording and managing logs """
 import time
 import logging
 
@@ -47,34 +44,32 @@ class Log:
 
 class Logger:
     """
-    基于logging模块定义一个日志器。
-      - 外部调用该类即可记录日志，不需要再导入logging模块。
-      - 统一使用logger.log("INFO", "bbb")的格式记录日志，这样通用性强。
+    Record logs based on the logging module.
     """
 
-    def __init__(self, name, level="INFO"):
-        self.logger = logging.getLogger(name)   # 创建一个日志器
-        self.logger.setLevel(self._checkLevel(level))  # 设置日志级别，进行过滤
+    def __init__(self, name, level='INFO'):
+        self.logger = logging.getLogger(name)
+        self.logger.setLevel(self._checkLevel(level))
         self.formatter = logging.Formatter(
-            fmt="{asctime}  {levelname:5}  {threadName:15} : {message}", style='{')
+            fmt='{asctime}  {levelname:5}  {threadName:15} : {message}', style='{')
 
     def _checkLevel(self, level):
         """
-        检查日志级别level的取值是否合法。
-          - 这里调用logging模块，取值范围为：{'CRITICAL': 50, 'FATAL': 50, 'ERROR': 40,
+        Check if the log level is valid.
+        - Valid values include: {'CRITICAL': 50, 'FATAL': 50, 'ERROR': 40,
           'WARN': 30, 'WARNING': 30, 'INFO': 20, 'DEBUG': 10, 'NOTSET': 0}
         """
         return logging._checkLevel(level)
 
-    def to_file(self, filename, level="DEBUG"):
-        """ 添加一个日志处理器，将日志输出到一个文件（写入为追加模式）。 """
+    def to_file(self, filename, level='DEBUG'):
+        """ Add a log handler to output the log to a file. """
         handler = logging.FileHandler(filename)
         handler.setLevel(self._checkLevel(level))
-        handler.setFormatter(self.formatter)  # 设置该handler的格式
-        self.logger.addHandler(handler)  # 将该handler添加到日志器
+        handler.setFormatter(self.formatter)
+        self.logger.addHandler(handler)
 
-    def to_console(self, level="INFO"):
-        """ 添加一个日志处理器，将日志输出到终端。 """
+    def to_console(self, level='INFO'):
+        """ Add a log handler to output the log to the console. """
         console_handler = logging.StreamHandler()
         console_handler.setLevel(self._checkLevel(level))
         console_handler.setFormatter(self.formatter)
@@ -84,14 +79,13 @@ class Logger:
         self.logger.log(self._checkLevel(level), msg, *args, **kwargs)
 
 
-# sample
-if __name__ == "__main__":
-    logger = Logger(__file__, "DEBUG")
+if __name__ == '__main__':
+    logger = Logger(__file__, 'DEBUG')
 
-    filename = __file__ + time.strftime("_%Y%m%d", time.localtime()) + ".log"
-    logger.to_file(filename, "DEBUG")
+    filename = __file__ + time.strftime('_%Y%m%d', time.localtime()) + '.log'
+    logger.to_file(filename, 'DEBUG')
 
-    logger.to_console("INFO")
+    logger.to_console('INFO')
 
-    logger.log("DEBUG", "aaa")
-    logger.log("INFO", "bbb")
+    logger.log('DEBUG', 'aaa')
+    logger.log('INFO', 'bbb')

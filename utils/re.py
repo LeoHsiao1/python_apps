@@ -1,6 +1,4 @@
-"""
-扩展re模块的功能
-"""
+""" Used to extend functions of re module. """
 import re
 
 

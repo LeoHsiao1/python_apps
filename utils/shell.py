@@ -173,12 +173,12 @@ def find(directory='.', pattern=None, re_pattern=None, depth=-1, onerror=print) 
     find(re_pattern='.*.py')
     """
     if not os.path.isdir(directory):
-        raise ValueError("{} is not an existing directory.".format(directory))
+        raise ValueError('{} is not an existing directory.'.format(directory))
 
     try:
         file_list = os.listdir(directory)
     except PermissionError as e:    # Sometimes it does not have access to the directory
-        onerror("PermissionError: {}".format(e))
+        onerror('PermissionError: {}'.format(e))
         return []
 
     def match(name, pattern=None, re_pattern=None):
@@ -387,6 +387,6 @@ def diff_bytes(file1, file2, return_str=False):
 def md5sum(filename):
     """ Calculate the MD5 value of the file """
     import hashlib
-    with open(filename, "rb") as f:
+    with open(filename, 'rb') as f:
         return hashlib.md5(f.read()).hexdigest()
 

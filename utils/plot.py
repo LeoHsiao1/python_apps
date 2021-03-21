@@ -1,13 +1,13 @@
 """
-关于画图。
-需要安装：pip install matplotlib
+For drawing.
+Installation required: pip install matplotlib
 """
 
 import threading
 
 import matplotlib.pyplot as plt
 
-from ._time import Timer
+from .time import Timer
 
 
 class DynamicPlot(threading.Thread):
