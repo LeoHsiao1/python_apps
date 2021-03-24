@@ -4,14 +4,14 @@ import traceback
 
 import _load_utils
 from utils.io import Inputs
-from utils.os import find_file
+from utils.shell import find
 
 
 print("""该脚本的用途：检查目标目录（包括子目录）下所有文件的文件名，将编号 (1) - (9) 改为 (01) - (09) 。""")
 Inputs.path = Inputs.input_path('请输入要检索的目录：')
 
 print('检索所有文件...')
-file_list = find_file(Inputs.path)
+file_list = find(Inputs.path)
 
 for path in file_list:
     dirname, basename = os.path.split(path)

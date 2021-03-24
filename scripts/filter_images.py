@@ -6,14 +6,14 @@ from PIL import Image
 
 import _load_utils
 from utils.io import Inputs
-from utils.os import find_file
+from utils.shell import find
 
 
 print("""该脚本的用途：找出目标目录（包括子目录）下的所有图片（后缀名为jpg、png），筛选出符合条件的图片，将它们拷贝到当前目录下。""")
 Inputs.path = Inputs.input_path('请输入目标目录：')
 
 print('检索所有文件...')
-file_list = find_file(Inputs.path)
+file_list = find(Inputs.path)
 
 # 创建一个保存结果的文件夹
 result_dir = os.path.join(os.getcwd(), 'results')

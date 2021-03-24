@@ -3,7 +3,7 @@ import traceback
 
 import _load_utils
 from utils.io import Inputs
-from utils.os import find_file
+from utils.shell import find
 
 
 # 提示用户输入
@@ -15,7 +15,7 @@ Inputs.pattern = input("请输入文件名格式（比如'*.txt'）：")
 result_file_name = "merge_result"
 
 # 获得符合条件的文件列表
-file_list = find_file(Inputs.path, pattern=Inputs.pattern)
+file_list = find(Inputs.path, pattern=Inputs.pattern)
 
 # 读取每个文件的内容并合并
 print("开始处理...")
