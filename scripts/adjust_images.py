@@ -1,5 +1,5 @@
 """
-需要安装：  pip install pillow==7.0.0 pyexiv2==2.0.0
+需要安装： pip install pillow pyexiv2
 """
 import os
 import traceback
