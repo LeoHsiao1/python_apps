@@ -42,8 +42,11 @@ for path in file_list:
             img = img.convert('RGB')
         elif suffix != '.jpg':
             pass
+        elif width > 4000:
+            # 缩小图片尺寸（即使不缩小，重新保存也会减少图片体积，而且该操作具有幂等性）
+            rate = width / 4000
+            img.thumbnail((width / rate, height / rate))
         elif height > 4000:
-            # 缩小图片尺寸（即使不缩小，重新保存也会减少图片体积，而且也具有幂等性）
             rate = height / 4000
             img.thumbnail((width / rate, height / rate))
         else:
