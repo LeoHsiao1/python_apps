@@ -36,19 +36,22 @@ for path in file_list:
     try:
         img = Image.open(path)
         width, height = img.size
+        max_size = 4000
 
         # 判断是否需要修改图片
         if img.mode != 'RGB':
             img = img.convert('RGB')
         elif suffix != '.jpg':
             pass
-        elif width > 4000:
-            # 缩小图片尺寸（即使不缩小，重新保存也会减少图片体积，而且该操作具有幂等性）
-            rate = width / 4000
-            img.thumbnail((width / rate, height / rate))
-        elif height > 4000:
-            rate = height / 4000
-            img.thumbnail((width / rate, height / rate))
+        elif width > max_size or height > max_size:
+            # 缩小图片尺寸直到 max_size ，从而减少图片占用的磁盘空间
+            if width > max_size:
+                height = round(height * max_size / width)
+                width = max_size
+            if height > max_size:
+                width = round(width * max_size / height)
+                height = max_size
+            img.thumbnail((width, height))
         else:
             continue    # 如果图片不需要修改，则跳过
 
