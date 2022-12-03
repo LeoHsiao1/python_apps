@@ -39,28 +39,32 @@ for path in file_list:
         max_size = 4000
 
         # 判断是否需要修改图片
+        modified_reason = []
         if img.mode != 'RGB':
             img = img.convert('RGB')
-        elif suffix != '.jpg':
-            pass
-        elif width > max_size or height > max_size:
-            # 缩小图片尺寸直到 max_size ，从而减少图片占用的磁盘空间
+            modified_reason.append('修改图片模式为 RGB')
+        if suffix != '.jpg':
+            modified_reason.append('修改后缀名为 .jpg')
+        if width > max_size or height > max_size:
+            # 缩小图片尺寸，以至于不超过 max_size ，从而减少图片占用的磁盘空间
             if width > max_size:
                 height = round(height * max_size / width)
                 width = max_size
+                modified_reason.append('缩小 width')
             if height > max_size:
                 width = round(width * max_size / height)
                 height = max_size
+                modified_reason.append('缩小 height')
             img.thumbnail((width, height))
-        else:
-            continue    # 如果图片不需要修改，则跳过
-
         # # 如果原图片的高度小于1080，则放大至1080（不推荐，因为这样放大会产生锯齿）
         # if img.size[1] < 1080:
         #     width, height = img.size
         #     times = 1080 / height
         #     new_size = round(width * times), round(height * times)
         #     img = img.resize(new_size)
+        # 如果图片不需要修改，则跳过以下操作
+        if not modified_reason:
+            continue
 
         # 生成新图片的保存路径
         new_path = path[:path.rfind('.')] + new_suffix
@@ -95,10 +99,10 @@ for path in file_list:
         #     img.clear_iptc()
         #     img.clear_xmp()
 
-        print('已保存：{}'.format(new_path))
+        print(f'已修改图片：{new_path=} , {modified_reason=}')
 
     except:
-        print('处理失败：{}'.format(path))
+        print(f'处理图片失败：{path=}')
         traceback.print_exc()
 
 print('\n脚本结束\n')
