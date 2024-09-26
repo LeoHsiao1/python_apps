@@ -61,7 +61,7 @@ class DynamicPlot(threading.Thread):
                 # 每次循环绘制的是一条新线段，颜色随机，这里给它们设置统一的颜色
                 plt.pause(0.1)
 
-        # TODO：鼠标拖动图像窗口时，plot线程会暂停运行，待考虑这个问题
+        # TODO：鼠标拖动图像窗口时，plot线程会暂停运行，这个问题待处理
 
     def show(self):
         self.start()
