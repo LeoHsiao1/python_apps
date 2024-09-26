@@ -1,6 +1,0 @@
-Django==3.2.24
-django-simpleui==4.0.3
-django-import-export==2.3.0
-uWSGI==2.0.22
-mysqlclient==1.4.4
-django-debug-toolbar==3.2.1
