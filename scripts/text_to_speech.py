@@ -1,8 +1,3 @@
-"""
-该脚本调用 edge-tts 来朗读英文 text ，生成 mp3 文件。
-需要先安装 pip install edge-tts
-"""
-
 import os
 import re
 import subprocess
@@ -49,24 +44,31 @@ def replace(string, src: str, dst: str) -> str:
 
 try:
     # 读取原文本
-    with open('text.txt', 'r', encoding='utf-8') as f:
+    with open('text.md', 'r', encoding='utf-8') as f:
         text = f.read()
 
-    # 在文本中插入 \n ，使得朗读时停顿
-    text = replace(text, '```yml', '```')
-    text = replace(text, ' # .*', '') # 忽略 # 开头的注释，从而简化朗读内容
+    # 忽略 # 开头的注释，从而简化朗读内容
+    text = replace(text, ' # .*', '')
+
+    # 在文本中插入 \n ，强制朗读时停顿
     text = replace(text, '#', '\nhashtag\n')
     text = replace(text, '- ', '\nnext paragraph\n')
+    text = replace(text, ': ', '\n: \n')
+
+    # 替换特殊符号
+    text = replace(text, '```yml', '```')
     text = replace(text, '/', ' or ')
+    text = replace(text, '≈', ' or ')
+
     # text = replace(text, ' +([\\u4e00-\\u9fa5])', '\n$1')
     # text = replace(text, '  +', '\n')
 
     # 保存修改后的文本
-    with open('text_modified.txt', 'w', encoding='utf-8') as f:
+    with open('text_modified.md', 'w', encoding='utf-8') as f:
         f.write(text)
 
-    # 用 edge-tts 朗读文本，生成 mp3 文件
-    command='edge-tts --voice en-US-AvaMultilingualNeural --file text_modified.txt --write-media text.mp3'
+    # 用 edge-tts 朗读文本，保存为 mp3 文件
+    command='edge-tts --voice en-US-AvaMultilingualNeural --file text_modified.md --write-media text.mp3'
     with os.popen(command) as p:
         print(p.read())
 
